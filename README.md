@@ -2,7 +2,7 @@
 
 This fork provides a way to inject information in the response of `Sys.GetInfo`.
 
-This is done by creating a header file that defines the macros: `CUSTOM_SYS_INFO_PROPERTY_KEYS` and `CUSTOM_SYS_INFO_PROPERTY_VALUES`. The file the needs to be specified in mos.yaml as a global macro. For example:
+This is done by creating a header file that defines the macros: `CUSTOM_SYS_INFO_PROPERTY_KEYS` and `CUSTOM_SYS_INFO_PROPERTY_VALUES`. The file the needs to be specified in mos.yaml as a global macro named `MGOS_SYS_INFO_MACRO_FILE`. For example:
 
 mos.yaml
 ```yaml
