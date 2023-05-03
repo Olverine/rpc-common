@@ -50,6 +50,11 @@
 #ifdef MGOS_HAVE_PPPOS
 #include "mgos_pppos.h"
 #endif
+#ifdef MGOS_SYS_INFO_MACRO_FILE
+#define STRINGIFY(X) STRINGIFY2(X)    
+#define STRINGIFY2(X) #X
+#include STRINGIFY(MGOS_SYS_INFO_MACRO_FILE)
+#endif
 
 #ifndef MGOS_RPC_REBOOT_LOCKOUT_MS
 #define MGOS_RPC_REBOOT_LOCKOUT_MS 100
@@ -208,6 +213,10 @@ int mgos_print_sys_info(struct json_out *out) {
       "mac: %Q, arch: %Q, uptime: %lu, public_key: %Q, "
       "ram_size: %u, ram_free: %u, ram_min_free: %u, "
       "fs_size: %u, fs_free: %u"
+#ifdef CUSTOM_SYS_INFO_PROPERTY_KEYS
+      ","
+      CUSTOM_SYS_INFO_PROPERTY_KEYS
+#endif
 #ifdef MGOS_HAVE_WIFI
       ",wifi: {sta_ip: %Q, ap_ip: %Q, status: %Q, ssid: %Q}"
 #endif
@@ -225,6 +234,10 @@ int mgos_print_sys_info(struct json_out *out) {
       mgos_sys_config_get_device_public_key(), mgos_get_heap_size(),
       mgos_get_free_heap_size(), mgos_get_min_free_heap_size(),
       mgos_get_fs_size(), mgos_get_free_fs_size()
+#ifdef CUSTOM_SYS_INFO_PROPERTY_VALUES
+      ,
+      CUSTOM_SYS_INFO_PROPERTY_VALUES
+#endif
 #ifdef MGOS_HAVE_WIFI
                               ,
       sta_ip, ap_ip, status == NULL ? "" : status, ssid == NULL ? "" : ssid
